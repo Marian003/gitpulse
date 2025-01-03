@@ -1,3 +1,5 @@
 ﻿[project]
 name = "gitpulse"
 version = "0.1.0"
+description = "Beautiful terminal dashboard for GitHub profile stats"
+requires-python = ">=3.10"
