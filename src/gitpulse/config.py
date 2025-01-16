@@ -8,6 +8,13 @@ ENV_TOKEN_KEY = "GITHUB_TOKEN"
 class Config:
     token: Optional[str] = None
 
+    @property
+    def headers(self) -> dict:
+        h = {"Accept": "application/vnd.github+json"}
+        if self.token:
+            h["Authorization"] = f"Bearer {self.token}"
+        return h
+
 def resolve_token(token_flag: Optional[str] = None) -> Optional[str]:
     if token_flag:
         return token_flag
