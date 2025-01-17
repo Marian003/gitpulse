@@ -7,6 +7,8 @@ ENV_TOKEN_KEY = "GITHUB_TOKEN"
 @dataclass
 class Config:
     token: Optional[str] = None
+    timeout: float = 15.0
+    max_retries: int = 2
 
     @property
     def headers(self) -> dict:
