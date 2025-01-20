@@ -5,4 +5,5 @@ description = "Beautiful terminal dashboard for GitHub profile stats"
 requires-python = ">=3.10"
 dependencies = [
     "typer>=0.9.0",
+    "httpx>=0.25.0",
 ]
