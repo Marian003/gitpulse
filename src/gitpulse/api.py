@@ -2,6 +2,9 @@
 import httpx
 from gitpulse.config import Config
 
+class GitHubAPIError(Exception):
+    """Base exception for GitHub API errors."""
+
 class GitHubClient:
     def __init__(self, config: Config) -> None:
         self._config = config
