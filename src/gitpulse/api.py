@@ -5,6 +5,12 @@ from gitpulse.config import Config
 class GitHubAPIError(Exception):
     """Base exception for GitHub API errors."""
 
+class UserNotFoundError(GitHubAPIError):
+    """Raised when user does not exist."""
+    def __init__(self, username: str) -> None:
+        super().__init__(f"GitHub user '{username}' not found.")
+        self.username = username
+
 class GitHubClient:
     def __init__(self, config: Config) -> None:
         self._config = config
