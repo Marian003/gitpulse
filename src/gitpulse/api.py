@@ -6,10 +6,13 @@ class GitHubAPIError(Exception):
     """Base exception for GitHub API errors."""
 
 class UserNotFoundError(GitHubAPIError):
-    """Raised when user does not exist."""
     def __init__(self, username: str) -> None:
         super().__init__(f"GitHub user '{username}' not found.")
         self.username = username
+
+class RateLimitError(GitHubAPIError):
+    def __init__(self) -> None:
+        super().__init__("GitHub API rate limit exceeded.")
 
 class GitHubClient:
     def __init__(self, config: Config) -> None:
