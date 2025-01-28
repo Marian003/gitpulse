@@ -33,4 +33,10 @@ class GitHubClient:
     async def _get(self, path: str) -> Any:
         assert self._client is not None
         resp = await self._client.get(path)
+        if resp.status_code == 404:
+            username = path.strip("/").split("/")[-1]
+            raise UserNotFoundError(username)
+        if resp.status_code == 403:
+            raise RateLimitError()
+        resp.raise_for_status()
         return resp.json()
