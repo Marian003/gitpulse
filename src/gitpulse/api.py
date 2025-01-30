@@ -50,3 +50,6 @@ class GitHubClient:
             resp.raise_for_status()
             return resp.json()
         raise GitHubAPIError("Request timed out") from last_exc
+
+    async def fetch_user(self, username: str) -> dict[str, Any]:
+        return await self._get(f"/users/{username}")
