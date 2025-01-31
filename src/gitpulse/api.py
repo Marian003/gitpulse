@@ -53,3 +53,6 @@ class GitHubClient:
 
     async def fetch_user(self, username: str) -> dict[str, Any]:
         return await self._get(f"/users/{username}")
+
+    async def fetch_repos(self, username: str) -> list[dict[str, Any]]:
+        return await self._get(f"/users/{username}/repos", params={"per_page": 100})
