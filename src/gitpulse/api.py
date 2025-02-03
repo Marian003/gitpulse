@@ -21,10 +21,7 @@ class GitHubClient:
         self._client: Optional[httpx.AsyncClient] = None
 
     async def __aenter__(self) -> "GitHubClient":
-        self._client = httpx.AsyncClient(
-            headers=self._config.headers,
-            timeout=self._config.timeout,
-        )
+        self._client = httpx.AsyncClient(headers=self._config.headers, timeout=self._config.timeout)
         return self
 
     async def __aexit__(self, *_: Any) -> None:
@@ -56,3 +53,6 @@ class GitHubClient:
 
     async def fetch_repos(self, username: str) -> list[dict[str, Any]]:
         return await self._get(f"/users/{username}/repos", params={"per_page": 100})
+
+    async def fetch_events(self, username: str) -> list[dict[str, Any]]:
+        return await self._get(f"/users/{username}/events/public", params={"per_page": 100})
