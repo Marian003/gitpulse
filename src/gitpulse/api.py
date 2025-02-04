@@ -56,3 +56,11 @@ class GitHubClient:
 
     async def fetch_events(self, username: str) -> list[dict[str, Any]]:
         return await self._get(f"/users/{username}/events/public", params={"per_page": 100})
+
+    async def fetch_all(self, username: str) -> tuple:
+        user, repos, events = await asyncio.gather(
+            self.fetch_user(username),
+            self.fetch_repos(username),
+            self.fetch_events(username),
+        )
+        return user, repos, events
