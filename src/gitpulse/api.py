@@ -39,6 +39,8 @@ class GitHubClient:
                 if attempt < self._config.max_retries:
                     await asyncio.sleep(0.5 * (attempt + 1))
                 continue
+            except httpx.RequestError as exc:
+                raise GitHubAPIError(f"Network error: {exc}") from exc
             if resp.status_code == 404:
                 username = path.strip("/").split("/")[-1]
                 raise UserNotFoundError(username)
