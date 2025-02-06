@@ -54,10 +54,10 @@ class GitHubClient:
         return await self._get(f"/users/{username}")
 
     async def fetch_repos(self, username: str) -> list[dict[str, Any]]:
-        return await self._get(f"/users/{username}/repos", params={"per_page": 100})
+        return await self._get(f"/users/{username}/repos", params={"per_page": 100, "sort": "updated"})
 
     async def fetch_events(self, username: str) -> list[dict[str, Any]]:
-        return await self._get(f"/users/{username}/events/public", params={"per_page": 100})
+        return await self._get(f"/users/{username}/events/public", params={"per_page": 100, "sort": "updated"})
 
     async def fetch_all(self, username: str) -> tuple:
         user, repos, events = await asyncio.gather(
