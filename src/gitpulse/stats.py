@@ -16,3 +16,10 @@ class RepoStats:
 class StreakInfo:
     current_streak: int
     longest_streak: int
+
+@dataclass
+class CommitInfo:
+    sha: str
+    repo: str
+    message: str
+    date: str
