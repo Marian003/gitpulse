@@ -1,4 +1,5 @@
 ﻿from dataclasses import dataclass
+from typing import Optional
 
 @dataclass
 class LanguageBreakdown:
@@ -23,3 +24,15 @@ class CommitInfo:
     repo: str
     message: str
     date: str
+
+@dataclass
+class ProfileStats:
+    username: str
+    name: str
+    bio: Optional[str]
+    followers: int
+    following: int
+    public_repos: int
+    languages: list
+    streak: StreakInfo
+    recent_commits: list
