@@ -1,5 +1,5 @@
 ﻿from dataclasses import dataclass
-from typing import Optional
+from typing import Any, Optional
 
 @dataclass
 class LanguageBreakdown:
@@ -36,3 +36,15 @@ class ProfileStats:
     languages: list
     streak: StreakInfo
     recent_commits: list
+
+def compute_languages(repos: list[dict[str, Any]]) -> list[LanguageBreakdown]:
+    counts: dict[str, int] = {}
+    for repo in repos:
+        lang = repo.get("language")
+        if lang:
+            counts[lang] = counts.get(lang, 0) + 1
+    total = sum(counts.values()) or 1
+    return [
+        LanguageBreakdown(name=n, count=c, percentage=round(c/total*100, 1))
+        for n, c in counts.items()
+    ]
