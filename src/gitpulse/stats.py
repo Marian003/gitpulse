@@ -51,3 +51,8 @@ def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[Langu
         LanguageBreakdown(name=n, count=c, percentage=round(c/total*100, 1))
         for n, c in sorted_langs
     ]
+
+def compute_repo_stats(repos: list[dict[str, Any]]) -> RepoStats:
+    total_stars = sum(r.get("stargazers_count", 0) for r in repos)
+    total_forks = sum(r.get("forks_count", 0) for r in repos)
+    return RepoStats(total_stars=total_stars, total_forks=total_forks, total_repos=len(repos))
