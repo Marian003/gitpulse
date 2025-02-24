@@ -11,6 +11,10 @@ class LanguageBreakdown:
 class RepoStats:
     total_stars: int
     total_forks: int
+    most_starred_name: str
+    most_starred_stars: int
+    most_forked_name: str
+    most_forked_forks: int
     total_repos: int
 
 @dataclass
@@ -53,6 +57,18 @@ def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[Langu
     ]
 
 def compute_repo_stats(repos: list[dict[str, Any]]) -> RepoStats:
+    if not repos:
+        return RepoStats(0, 0, "â€”", 0, "â€”", 0, 0)
     total_stars = sum(r.get("stargazers_count", 0) for r in repos)
     total_forks = sum(r.get("forks_count", 0) for r in repos)
-    return RepoStats(total_stars=total_stars, total_forks=total_forks, total_repos=len(repos))
+    most_starred = max(repos, key=lambda r: r.get("stargazers_count", 0))
+    most_forked = max(repos, key=lambda r: r.get("forks_count", 0))
+    return RepoStats(
+        total_stars=total_stars,
+        total_forks=total_forks,
+        most_starred_name=most_starred.get("name", "â€”"),
+        most_starred_stars=most_starred.get("stargazers_count", 0),
+        most_forked_name=most_forked.get("name", "â€”"),
+        most_forked_forks=most_forked.get("forks_count", 0),
+        total_repos=len(repos),
+    )
