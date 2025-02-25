@@ -1,4 +1,5 @@
 ﻿from dataclasses import dataclass
+from datetime import date, datetime, timezone
 from typing import Any, Optional
 
 @dataclass
@@ -72,3 +73,25 @@ def compute_repo_stats(repos: list[dict[str, Any]]) -> RepoStats:
         most_forked_forks=most_forked.get("forks_count", 0),
         total_repos=len(repos),
     )
+
+def _parse_event_date(event: dict[str, Any]) -> Optional[date]:
+    created_at = event.get("created_at")
+    if not created_at:
+        return None
+    try:
+        dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+        return dt.astimezone(timezone.utc).date()
+    except (ValueError, AttributeError):
+        return None
+
+def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
+    push_dates: set[date] = set()
+    for event in events:
+        if event.get("type") != "PushEvent":
+            continue
+        d = _parse_event_date(event)
+        if d:
+            push_dates.add(d)
+    if not push_dates:
+        return StreakInfo(current_streak=0, longest_streak=0)
+    return StreakInfo(current_streak=len(push_dates), longest_streak=len(push_dates))
