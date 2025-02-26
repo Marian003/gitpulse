@@ -1,5 +1,5 @@
 ﻿from dataclasses import dataclass
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Any, Optional
 
 @dataclass
@@ -94,4 +94,16 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
             push_dates.add(d)
     if not push_dates:
         return StreakInfo(current_streak=0, longest_streak=0)
-    return StreakInfo(current_streak=len(push_dates), longest_streak=len(push_dates))
+
+    # Longest streak calculation
+    all_dates = sorted(push_dates)
+    longest = 1
+    run = 1
+    for i in range(1, len(all_dates)):
+        if (all_dates[i] - all_dates[i-1]).days == 1:
+            run += 1
+            longest = max(longest, run)
+        else:
+            run = 1
+
+    return StreakInfo(current_streak=0, longest_streak=longest)
