@@ -95,7 +95,7 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
     if not push_dates:
         return StreakInfo(current_streak=0, longest_streak=0)
 
-    # Longest streak calculation
+    # Longest streak
     all_dates = sorted(push_dates)
     longest = 1
     run = 1
@@ -106,4 +106,17 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
         else:
             run = 1
 
-    return StreakInfo(current_streak=0, longest_streak=longest)
+    # Current streak (from today backwards)
+    today = date.today()
+    current = 0
+    check = today
+    while check in push_dates:
+        current += 1
+        check = check - timedelta(days=1)
+    if current == 0:
+        check = today - timedelta(days=1)
+        while check in push_dates:
+            current += 1
+            check = check - timedelta(days=1)
+
+    return StreakInfo(current_streak=current, longest_streak=longest)
