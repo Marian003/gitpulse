@@ -94,8 +94,6 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
             push_dates.add(d)
     if not push_dates:
         return StreakInfo(current_streak=0, longest_streak=0)
-
-    # Longest streak
     all_dates = sorted(push_dates)
     longest = 1
     run = 1
@@ -105,8 +103,6 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
             longest = max(longest, run)
         else:
             run = 1
-
-    # Current streak (from today backwards)
     today = date.today()
     current = 0
     check = today
@@ -118,5 +114,20 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
         while check in push_dates:
             current += 1
             check = check - timedelta(days=1)
-
     return StreakInfo(current_streak=current, longest_streak=longest)
+
+def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> list[CommitInfo]:
+    commits: list[CommitInfo] = []
+    for event in events:
+        if event.get("type") != "PushEvent":
+            continue
+        payload = event.get("payload", {})
+        repo_name = event.get("repo", {}).get("name", "unknown")
+        created_at = event.get("created_at", "")
+        for commit in payload.get("commits", []):
+            sha = commit.get("sha", "")[:7]
+            message = commit.get("message", "")
+            commits.append(CommitInfo(sha=sha, repo=repo_name, message=message, date=created_at[:10]))
+            if len(commits) >= limit:
+                return commits
+    return commits
