@@ -131,3 +131,18 @@ def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> lis
             if len(commits) >= limit:
                 return commits
     return commits
+
+
+def build_profile_stats(data: tuple) -> "ProfileStats":
+    user, repos, events = data
+    return ProfileStats(
+        username=user.get("login", ""),
+        name=user.get("name") or user.get("login", ""),
+        bio=user.get("bio"),
+        followers=user.get("followers", 0),
+        following=user.get("following", 0),
+        public_repos=user.get("public_repos", 0),
+        languages=compute_languages(repos),
+        streak=compute_streak(events),
+        recent_commits=extract_recent_commits(events),
+    )
