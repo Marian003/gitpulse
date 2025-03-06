@@ -19,5 +19,8 @@ DEFAULT_LANG_COLOR = "bright_white"
 def _build_profile_panel(stats: ProfileStats) -> Panel:
     t = Text()
     t.append(f"  {stats.name}\n", style="bold bright_white")
-    t.append(f"  {stats.html_url if hasattr(stats, 'html_url') else ''}\n", style="dim")
+    if stats.bio:
+        t.append(f"  {stats.bio}\n", style="italic dim")
+    t.append(f"\n  Followers: {stats.followers}  Following: {stats.following}\n")
+    t.append(f"  Public repos: {stats.public_repos}\n")
     return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", expand=True)
