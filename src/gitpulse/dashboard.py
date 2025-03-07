@@ -24,3 +24,9 @@ def _build_profile_panel(stats: ProfileStats) -> Panel:
     t.append(f"\n  Followers: {stats.followers}  Following: {stats.following}\n")
     t.append(f"  Public repos: {stats.public_repos}\n")
     return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", expand=True)
+
+def _build_languages_panel(stats: ProfileStats) -> Panel:
+    t = Text()
+    for lang in stats.languages:
+        t.append(f"  {lang.name}: {lang.percentage}%\n")
+    return Panel(t, title="[bold green]LANGUAGES[/bold green]", expand=True)
