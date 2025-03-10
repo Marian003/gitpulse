@@ -15,6 +15,17 @@ LANG_COLORS: dict[str, str] = {
     "Shell": "green",
 }
 DEFAULT_LANG_COLOR = "bright_white"
+BAR_FULL = "â–ˆ"
+BAR_EMPTY = "â–‘"
+BAR_WIDTH = 12
+
+def _lang_bar(percentage: float, color: str) -> Text:
+    filled = round(percentage / 100 * BAR_WIDTH)
+    empty = BAR_WIDTH - filled
+    t = Text()
+    t.append(BAR_FULL * filled, style=f"bold {color}")
+    t.append(BAR_EMPTY * empty, style="dim")
+    return t
 
 def _build_profile_panel(stats: ProfileStats) -> Panel:
     t = Text()
@@ -26,7 +37,13 @@ def _build_profile_panel(stats: ProfileStats) -> Panel:
     return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", expand=True)
 
 def _build_languages_panel(stats: ProfileStats) -> Panel:
+    if not stats.languages:
+        return Panel(Text("  No language data."), title="[bold green]LANGUAGES[/bold green]", expand=True)
     t = Text()
+    t.append("\n")
     for lang in stats.languages:
-        t.append(f"  {lang.name}: {lang.percentage}%\n")
+        color = LANG_COLORS.get(lang.name, DEFAULT_LANG_COLOR)
+        t.append(f"  {lang.name:<12} ", style=f"bold {color}")
+        t.append_text(_lang_bar(lang.percentage, color))
+        t.append(f"  {lang.percentage:5.1f}%\n")
     return Panel(t, title="[bold green]LANGUAGES[/bold green]", expand=True)
