@@ -47,3 +47,12 @@ def _build_languages_panel(stats: ProfileStats) -> Panel:
         t.append_text(_lang_bar(lang.percentage, color))
         t.append(f"  {lang.percentage:5.1f}%\n")
     return Panel(t, title="[bold green]LANGUAGES[/bold green]", expand=True)
+
+
+def _build_repos_panel(stats: ProfileStats) -> Panel:
+    rs = stats.repo_stats if hasattr(stats, "repo_stats") else None
+    t = Text()
+    if rs:
+        t.append(f"\n  Total stars: {rs.total_stars}\n")
+        t.append(f"  Total forks: {rs.total_forks}\n")
+    return Panel(t, title="[bold magenta]REPOSITORIES[/bold magenta]", expand=True)
