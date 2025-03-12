@@ -1,12 +1,16 @@
-﻿from dataclasses import dataclass
+﻿from __future__ import annotations
+
+from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from typing import Any, Optional
+
 
 @dataclass
 class LanguageBreakdown:
     name: str
     count: int
     percentage: float
+
 
 @dataclass
 class RepoStats:
@@ -18,10 +22,12 @@ class RepoStats:
     most_forked_forks: int
     total_repos: int
 
+
 @dataclass
 class StreakInfo:
     current_streak: int
     longest_streak: int
+
 
 @dataclass
 class CommitInfo:
@@ -29,6 +35,7 @@ class CommitInfo:
     repo: str
     message: str
     date: str
+
 
 @dataclass
 class ProfileStats:
@@ -38,9 +45,13 @@ class ProfileStats:
     followers: int
     following: int
     public_repos: int
-    languages: list
+    avatar_url: str
+    html_url: str
+    languages: list[LanguageBreakdown]
+    repo_stats: RepoStats
     streak: StreakInfo
-    recent_commits: list
+    recent_commits: list[CommitInfo]
+
 
 def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[LanguageBreakdown]:
     counts: dict[str, int] = {}
@@ -53,9 +64,10 @@ def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[Langu
     total = sum(counts.values())
     sorted_langs = sorted(counts.items(), key=lambda x: x[1], reverse=True)[:top_n]
     return [
-        LanguageBreakdown(name=n, count=c, percentage=round(c/total*100, 1))
+        LanguageBreakdown(name=n, count=c, percentage=round(c / total * 100, 1))
         for n, c in sorted_langs
     ]
+
 
 def compute_repo_stats(repos: list[dict[str, Any]]) -> RepoStats:
     if not repos:
@@ -74,6 +86,7 @@ def compute_repo_stats(repos: list[dict[str, Any]]) -> RepoStats:
         total_repos=len(repos),
     )
 
+
 def _parse_event_date(event: dict[str, Any]) -> Optional[date]:
     created_at = event.get("created_at")
     if not created_at:
@@ -83,6 +96,7 @@ def _parse_event_date(event: dict[str, Any]) -> Optional[date]:
         return dt.astimezone(timezone.utc).date()
     except (ValueError, AttributeError):
         return None
+
 
 def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
     push_dates: set[date] = set()
@@ -98,7 +112,7 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
     longest = 1
     run = 1
     for i in range(1, len(all_dates)):
-        if (all_dates[i] - all_dates[i-1]).days == 1:
+        if (all_dates[i] - all_dates[i - 1]).days == 1:
             run += 1
             longest = max(longest, run)
         else:
@@ -116,6 +130,7 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
             check = check - timedelta(days=1)
     return StreakInfo(current_streak=current, longest_streak=longest)
 
+
 def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> list[CommitInfo]:
     commits: list[CommitInfo] = []
     for event in events:
@@ -126,14 +141,15 @@ def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> lis
         created_at = event.get("created_at", "")
         for commit in payload.get("commits", []):
             sha = commit.get("sha", "")[:7]
-            message = commit.get("message", "")
-            commits.append(CommitInfo(sha=sha, repo=repo_name, message=message, date=created_at[:10]))
+            message = commit.get("message", "").split("\n")[0][:72]
+            short_repo = repo_name.split("/")[-1] if "/" in repo_name else repo_name
+            commits.append(CommitInfo(sha=sha, repo=short_repo, message=message, date=created_at[:10]))
             if len(commits) >= limit:
                 return commits
     return commits
 
 
-def build_profile_stats(data: tuple) -> "ProfileStats":
+def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]) -> ProfileStats:
     user, repos, events = data
     return ProfileStats(
         username=user.get("login", ""),
@@ -142,7 +158,10 @@ def build_profile_stats(data: tuple) -> "ProfileStats":
         followers=user.get("followers", 0),
         following=user.get("following", 0),
         public_repos=user.get("public_repos", 0),
+        avatar_url=user.get("avatar_url", ""),
+        html_url=user.get("html_url", ""),
         languages=compute_languages(repos),
+        repo_stats=compute_repo_stats(repos),
         streak=compute_streak(events),
         recent_commits=extract_recent_commits(events),
     )
