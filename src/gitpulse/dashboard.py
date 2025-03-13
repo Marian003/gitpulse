@@ -1,6 +1,9 @@
-﻿from rich.panel import Panel
+﻿from rich.console import Console
+from rich.panel import Panel
 from rich.text import Text
 from gitpulse.stats import ProfileStats
+
+console = Console()
 
 LANG_COLORS: dict[str, str] = {
     "Python": "yellow",
@@ -48,11 +51,18 @@ def _build_languages_panel(stats: ProfileStats) -> Panel:
         t.append(f"  {lang.percentage:5.1f}%\n")
     return Panel(t, title="[bold green]LANGUAGES[/bold green]", expand=True)
 
-
 def _build_repos_panel(stats: ProfileStats) -> Panel:
-    rs = stats.repo_stats if hasattr(stats, "repo_stats") else None
+    rs = stats.repo_stats
     t = Text()
-    if rs:
-        t.append(f"\n  Total stars: {rs.total_stars}\n")
-        t.append(f"  Total forks: {rs.total_forks}\n")
+    t.append(f"\n  Total stars: {rs.total_stars}\n")
+    t.append(f"  Total forks: {rs.total_forks}\n")
+    t.append(f"\n  Most starred: {rs.most_starred_name} ({rs.most_starred_stars})\n")
+    t.append(f"  Most forked: {rs.most_forked_name} ({rs.most_forked_forks})\n")
     return Panel(t, title="[bold magenta]REPOSITORIES[/bold magenta]", expand=True)
+
+def _build_streak_panel(stats: ProfileStats) -> Panel:
+    s = stats.streak
+    t = Text()
+    t.append(f"\n  Current streak: {s.current_streak} days\n")
+    t.append(f"  Longest streak: {s.longest_streak} days\n")
+    return Panel(t, title="[bold yellow]STREAK[/bold yellow]", expand=True)
