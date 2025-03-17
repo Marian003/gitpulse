@@ -76,3 +76,12 @@ def _build_commits_table(stats: ProfileStats) -> Table:
     for c in stats.recent_commits:
         table.add_row(c.sha, c.message, c.date)
     return table
+
+def render_dashboard(stats: ProfileStats) -> None:
+    console.print()
+    console.print(_build_profile_panel(stats))
+    console.print(_build_languages_panel(stats))
+    console.print(_build_repos_panel(stats))
+    console.print(_build_streak_panel(stats))
+    console.print(_build_commits_table(stats))
+    console.print()
