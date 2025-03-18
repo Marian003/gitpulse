@@ -1,4 +1,5 @@
-﻿from rich.console import Console
+﻿from rich.columns import Columns
+from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
@@ -79,7 +80,7 @@ def _build_commits_table(stats: ProfileStats) -> Table:
 
 def render_dashboard(stats: ProfileStats) -> None:
     console.print()
-    console.print(_build_profile_panel(stats))
+        console.print(Columns([_build_profile_panel(stats), _build_streak_panel(stats)], equal=True, expand=True))
     console.print(_build_languages_panel(stats))
     console.print(_build_repos_panel(stats))
     console.print(_build_streak_panel(stats))
