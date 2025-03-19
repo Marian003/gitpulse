@@ -78,11 +78,15 @@ def _build_commits_table(stats: ProfileStats) -> Table:
         table.add_row(c.sha, c.message, c.date)
     return table
 
+
 def render_dashboard(stats: ProfileStats) -> None:
     console.print()
-        console.print(Columns([_build_profile_panel(stats), _build_streak_panel(stats)], equal=True, expand=True))
-    console.print(_build_languages_panel(stats))
-    console.print(_build_repos_panel(stats))
-    console.print(_build_streak_panel(stats))
+    header = Text(justify="center")
+    header.append("GitPulse", style="bold bright_yellow")
+    header.append("  --  ", style="dim")
+    header.append(f"@{stats.username}", style="bold bright_cyan")
+    console.print(header)
+    console.print(Columns([_build_profile_panel(stats), _build_streak_panel(stats)], equal=True, expand=True))
+    console.print(Columns([_build_languages_panel(stats), _build_repos_panel(stats)], equal=True, expand=True))
     console.print(_build_commits_table(stats))
     console.print()
