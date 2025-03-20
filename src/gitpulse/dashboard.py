@@ -90,3 +90,10 @@ def render_dashboard(stats: ProfileStats) -> None:
     console.print(Columns([_build_languages_panel(stats), _build_repos_panel(stats)], equal=True, expand=True))
     console.print(_build_commits_table(stats))
     console.print()
+
+
+import json
+from rich import print as rprint
+
+def render_json(data) -> None:
+    rprint(json.dumps(data, indent=2, default=str))
