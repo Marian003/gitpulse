@@ -1,17 +1,51 @@
-﻿import typer
+﻿import asyncio
+from typing import Optional
 
-app = typer.Typer(name="gitpulse")
+import typer
+from rich.console import Console
+
+from gitpulse import __version__
+from gitpulse.api import GitHubAPIError, GitHubClient, RateLimitError, UserNotFoundError
+from gitpulse.config import Config, resolve_token
+from gitpulse.dashboard import render_dashboard, render_json
+from gitpulse.stats import build_profile_stats
+
+app = typer.Typer(name="gitpulse", help="Terminal dashboard for GitHub profile stats.")
+console = Console()
+err_console = Console(stderr=True)
 
 def _version_callback(value: bool) -> None:
     if value:
-        print("GitPulse v0.1.0")
+        console.print(f"GitPulse v{__version__}")
         raise typer.Exit()
 
 @app.command()
-def hello(
-    version: bool = typer.Option(None, "--version", "-v", callback=_version_callback, is_eager=True),
-):
-    print("Hello from GitPulse!")
+def main(
+    username: str = typer.Argument(..., help="GitHub username to inspect"),
+    token: Optional[str] = typer.Option(None, "--token", "-t", help="GitHub personal access token"),
+    json_output: bool = typer.Option(False, "--json", "-j", help="Output raw JSON"),
+    version: Optional[bool] = typer.Option(None, "--version", "-v", callback=_version_callback, is_eager=True),
+) -> None:
+    resolved_token = resolve_token(token)
+    config = Config(token=resolved_token)
 
-if __name__ == "__main__":
-    app()
+    async def _run():
+        async with GitHubClient(config) as client:
+            data = await client.fetch_all(username)
+        if json_output:
+            render_json({"user": data[0], "repos": data[1], "events": data[2]})
+        else:
+            stats = build_profile_stats(data)
+            render_dashboard(stats)
+
+    try:
+        asyncio.run(_run())
+    except UserNotFoundError as exc:
+        err_console.print(f"Error: {exc}")
+        raise typer.Exit(1)
+    except RateLimitError as exc:
+        err_console.print(f"Rate limited: {exc}")
+        raise typer.Exit(1)
+    except GitHubAPIError as exc:
+        err_console.print(f"API error: {exc}")
+        raise typer.Exit(1)
