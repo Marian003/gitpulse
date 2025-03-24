@@ -31,7 +31,8 @@ def main(
 
     async def _run():
         async with GitHubClient(config) as client:
-            data = await client.fetch_all(username)
+            with console.status("[bold cyan]Fetching data...[/bold cyan]"):
+                data = await client.fetch_all(username)
         if json_output:
             render_json({"user": data[0], "repos": data[1], "events": data[2]})
         else:
