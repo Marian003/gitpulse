@@ -23,7 +23,7 @@ def _version_callback(value: bool) -> None:
 def main(
     username: str = typer.Argument(..., help="GitHub username to inspect"),
     token: Optional[str] = typer.Option(None, "--token", "-t", help="GitHub personal access token"),
-    json_output: bool = typer.Option(False, "--json", "-j", help="Output raw JSON"),
+    json_output: bool = typer.Option(False, "--json", "-j", help="Output raw JSON instead of the dashboard"),
     version: Optional[bool] = typer.Option(None, "--version", "-v", callback=_version_callback, is_eager=True),
 ) -> None:
     resolved_token = resolve_token(token)
