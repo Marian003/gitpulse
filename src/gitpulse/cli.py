@@ -22,7 +22,7 @@ def _version_callback(value: bool) -> None:
 @app.command()
 def main(
     username: str = typer.Argument(..., help="GitHub username to inspect"),
-    token: Optional[str] = typer.Option(None, "--token", "-t", help="GitHub personal access token"),
+    token: Optional[str] = typer.Option(None, "--token", "-t", help="GitHub personal access token (or set GITHUB_TOKEN env var)"),
     json_output: bool = typer.Option(False, "--json", "-j", help="Output raw JSON instead of the dashboard"),
     version: Optional[bool] = typer.Option(None, "--version", "-v", callback=_version_callback, is_eager=True),
 ) -> None:
