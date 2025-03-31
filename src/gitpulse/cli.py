@@ -48,5 +48,5 @@ def main(
         err_console.print(f"[bold red]Rate limited:[/bold red] {exc}")
         raise typer.Exit(1)
     except GitHubAPIError as exc:
-        err_console.print(f"API error: {exc}")
+        err_console.print(f"[bold red]API error:[/bold red] {exc}")
         raise typer.Exit(1)
