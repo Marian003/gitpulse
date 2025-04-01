@@ -50,7 +50,7 @@ def _build_languages_panel(stats: ProfileStats) -> Panel:
         color = LANG_COLORS.get(lang.name, DEFAULT_LANG_COLOR)
         t.append(f"  {lang.name:<12} ", style=f"bold {color}")
         t.append_text(_lang_bar(lang.percentage, color))
-        t.append(f"  {lang.percentage:5.1f}%\n")
+        t.append(f"  {lang.percentage:5.1f}% \n")
     return Panel(t, title="[bold green]LANGUAGES[/bold green]", expand=True)
 
 def _build_repos_panel(stats: ProfileStats) -> Panel:
