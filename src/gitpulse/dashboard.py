@@ -18,6 +18,17 @@ LANG_COLORS: dict[str, str] = {
     "C++": "bright_white",
     "Ruby": "bright_red",
     "Shell": "green",
+    "HTML": "bright_red",
+    "CSS": "bright_blue",
+    "Dart": "cyan",
+    "Elixir": "magenta",
+    "Haskell": "bright_magenta",
+    "Lua": "blue",
+    "R": "bright_blue",
+    "Julia": "bright_green",
+    "Zig": "bright_yellow",
+    "PHP": "bright_magenta",
+    "Swift": "bright_yellow",
 }
 DEFAULT_LANG_COLOR = "bright_white"
 BAR_FULL = "â–ˆ"
