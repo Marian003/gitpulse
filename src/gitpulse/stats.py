@@ -141,7 +141,7 @@ def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> lis
         created_at = event.get("created_at", "")
         for commit in payload.get("commits", []):
             sha = commit.get("sha", "")[:7]
-            message = commit.get("message", "").split("\n")[0][:72]
+            message = commit.get("message", "").split("\n")[0][:72]  # truncate long messages
             short_repo = repo_name.split("/")[-1] if "/" in repo_name else repo_name
             commits.append(CommitInfo(sha=sha, repo=short_repo, message=message, date=created_at[:10]))
             if len(commits) >= limit:
