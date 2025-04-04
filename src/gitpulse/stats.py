@@ -70,7 +70,7 @@ def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[Langu
 
 
 def compute_repo_stats(repos: list[dict[str, Any]]) -> RepoStats:
-    if not repos:
+    if not repos:  # handle users with zero public repos
         return RepoStats(0, 0, "â€”", 0, "â€”", 0, 0)
     total_stars = sum(r.get("stargazers_count", 0) for r in repos)
     total_forks = sum(r.get("forks_count", 0) for r in repos)
