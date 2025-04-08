@@ -57,7 +57,7 @@ def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[Langu
     counts: dict[str, int] = {}
     for repo in repos:
         lang = repo.get("language")
-        if lang:
+        if lang:  # skip repos with no language set
             counts[lang] = counts.get(lang, 0) + 1
     if not counts:
         return []
