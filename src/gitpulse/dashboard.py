@@ -45,7 +45,7 @@ def _lang_bar(percentage: float, color: str) -> Text:
 
 def _build_profile_panel(stats: ProfileStats) -> Panel:
     t = Text()
-    t.append(f"  {stats.name}\n", style="bold bright_white")
+    t.append(f"  {stats.name or stats.username}\n", style="bold bright_white")
     if stats.bio:  # bio may be None or empty string
         t.append(f"  {stats.bio}\n", style="italic dim")
     t.append(f"\n  Followers: {stats.followers}  Following: {stats.following}\n")
