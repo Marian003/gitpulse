@@ -67,8 +67,8 @@ def _build_languages_panel(stats: ProfileStats) -> Panel:
 def _build_repos_panel(stats: ProfileStats) -> Panel:
     rs = stats.repo_stats
     t = Text()
-    t.append(f"\n  Total stars: {rs.total_stars}\n")
-    t.append(f"  Total forks: {rs.total_forks}\n")
+    t.append(f"\n  â­ Total stars: {rs.total_stars}\n")
+    t.append(f"  ðŸ´ Total forks: {rs.total_forks}\n")
     t.append(f"\n  Most starred: {rs.most_starred_name} ({rs.most_starred_stars})\n")
     t.append(f"  Most forked: {rs.most_forked_name} ({rs.most_forked_forks})\n")
     return Panel(t, title="[bold magenta]REPOSITORIES[/bold magenta]", expand=True)
