@@ -83,10 +83,11 @@ def _build_streak_panel(stats: ProfileStats) -> Panel:
 def _build_commits_table(stats: ProfileStats) -> Table:
     table = Table(show_header=True, expand=True, title="[bold blue]RECENT COMMITS[/bold blue]")
     table.add_column("SHA", width=8)
+    table.add_column("Repo", width=20)
     table.add_column("Message")
     table.add_column("Date", width=12)
     for c in stats.recent_commits:
-        table.add_row(c.sha, c.message, c.date)
+        table.add_row(c.sha, c.repo, c.message, c.date)
     return table
 
 
