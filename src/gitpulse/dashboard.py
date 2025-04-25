@@ -56,7 +56,7 @@ def _build_languages_panel(stats: ProfileStats) -> Panel:
     if not stats.languages:
         return Panel(Text("  No language data."), title="[bold green]LANGUAGES[/bold green]", expand=True)
     t = Text()
-    t.append("\n")
+    t.append("\n\n")
     for lang in stats.languages:
         color = LANG_COLORS.get(lang.name, DEFAULT_LANG_COLOR)
         t.append(f"  {lang.name:<12} ", style=f"bold {color}")
