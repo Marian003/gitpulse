@@ -50,7 +50,7 @@ def _build_profile_panel(stats: ProfileStats) -> Panel:
         t.append(f"  {stats.bio}\n", style="italic dim")
     t.append(f"\n  Followers: {stats.followers:,}  Following: {stats.following:,}\n")
     t.append(f"  Public repos: {stats.public_repos}\n")
-    return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", expand=True)
+    return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", border_style="cyan", expand=True)
 
 def _build_languages_panel(stats: ProfileStats) -> Panel:
     if not stats.languages:
