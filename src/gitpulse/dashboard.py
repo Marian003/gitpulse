@@ -54,7 +54,7 @@ def _build_profile_panel(stats: ProfileStats) -> Panel:
 
 def _build_languages_panel(stats: ProfileStats) -> Panel:
     if not stats.languages:
-        return Panel(Text("  No language data."), title="[bold green]LANGUAGES[/bold green]", expand=True)
+        return Panel(Text("  No language data."), title="[bold green]LANGUAGES[/bold green]", border_style="green", expand=True)
     t = Text()
     t.append("\n\n")
     for lang in stats.languages:
@@ -62,7 +62,7 @@ def _build_languages_panel(stats: ProfileStats) -> Panel:
         t.append(f"  {lang.name:<12} ", style=f"bold {color}")
         t.append_text(_lang_bar(lang.percentage, color))
         t.append(f"  {lang.percentage:5.1f}% \n")
-    return Panel(t, title="[bold green]LANGUAGES[/bold green]", expand=True)
+    return Panel(t, title="[bold green]LANGUAGES[/bold green]", border_style="green", expand=True)
 
 def _build_repos_panel(stats: ProfileStats) -> Panel:
     rs = stats.repo_stats
@@ -78,7 +78,7 @@ def _build_streak_panel(stats: ProfileStats) -> Panel:
     t = Text()
     t.append(f"\n  Current streak: {s.current_streak} days\n")
     t.append(f"  Longest streak: {s.longest_streak} days\n")
-    return Panel(t, title="[bold yellow]STREAK[/bold yellow]", expand=True)
+    return Panel(t, title="[bold yellow]STREAK[/bold yellow]", border_style="yellow", expand=True)
 
 def _build_commits_table(stats: ProfileStats) -> Table:
     table = Table(show_header=True, expand=True, title="[bold blue]RECENT COMMITS[/bold blue]")
