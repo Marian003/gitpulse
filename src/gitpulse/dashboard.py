@@ -1,7 +1,17 @@
-﻿from rich.columns import Columns
+﻿from __future__ import annotations
+
+from rich.columns import Columns
+from __future__ import annotations
+
 from rich.console import Console
+from __future__ import annotations
+
 from rich.panel import Panel
+from __future__ import annotations
+
 from rich.table import Table
+from __future__ import annotations
+
 from rich.text import Text
 from gitpulse.stats import ProfileStats
 
@@ -105,6 +115,8 @@ def render_dashboard(stats: ProfileStats) -> None:
 
 
 import json
+from __future__ import annotations
+
 from rich import print as rprint
 
 def render_json(data) -> None:
