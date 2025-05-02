@@ -1,4 +1,6 @@
-﻿import os
+﻿from __future__ import annotations
+
+import os
 from dataclasses import dataclass
 from typing import Optional
 
@@ -11,7 +13,7 @@ class Config:
     max_retries: int = 2
 
     @property
-    def headers(self) -> dict:
+    def headers(self) -> dict[str, str]:
         h = {"Accept": "application/vnd.github+json"}
         if self.token:
             h["Authorization"] = f"Bearer {self.token}"
