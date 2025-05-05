@@ -1,4 +1,6 @@
-﻿import asyncio
+﻿from __future__ import annotations
+
+import asyncio
 from typing import Any, Optional
 import httpx
 from gitpulse.config import Config
