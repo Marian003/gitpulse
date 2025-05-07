@@ -119,5 +119,5 @@ from __future__ import annotations
 
 from rich import print as rprint
 
-def render_json(data) -> None:
+def render_json(data: object) -> None:
     rprint(json.dumps(data, indent=2, default=str))
