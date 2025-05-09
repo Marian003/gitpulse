@@ -8,6 +8,7 @@ ENV_TOKEN_KEY = "GITHUB_TOKEN"
 
 @dataclass
 class Config:
+    """Configuration for the GitPulse API client."""
     token: Optional[str] = None
     timeout: float = 15.0
     max_retries: int = 2
