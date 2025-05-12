@@ -18,6 +18,7 @@ class RateLimitError(GitHubAPIError):
         super().__init__("GitHub API rate limit exceeded.")
 
 class GitHubClient:
+    """Async client for the GitHub REST API."""
     def __init__(self, config: Config) -> None:
         self._config = config
         self._client: Optional[httpx.AsyncClient] = None
