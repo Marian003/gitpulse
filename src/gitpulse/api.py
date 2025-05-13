@@ -54,9 +54,10 @@ class GitHubClient:
         raise GitHubAPIError("Request timed out") from last_exc
 
     async def fetch_user(self, username: str) -> dict[str, Any]:
+        """Fetch the public profile of a GitHub user."""
         return await self._get(f"/users/{username}")
 
-    async def fetch_repos(self, username: str, limit: int = 100) -> list[dict[str, Any]]:
+    async def fetch_repos(self, username: str  # docstring added, limit: int = 100) -> list[dict[str, Any]]:
         # Paginate results up to limit
         return await self._get(
             f"/users/{username}/repos",
