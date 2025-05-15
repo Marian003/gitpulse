@@ -102,6 +102,7 @@ def _build_commits_table(stats: ProfileStats) -> Table:
 
 
 def render_dashboard(stats: ProfileStats) -> None:
+    """Render the full GitPulse terminal dashboard."""
     console.print()
     header = Text(justify="center")
     header.append("GitPulse", style="bold bright_yellow")
