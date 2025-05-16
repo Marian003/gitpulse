@@ -12,7 +12,7 @@ from gitpulse.config import Config, resolve_token
 from gitpulse.dashboard import render_dashboard, render_json
 from gitpulse.stats import build_profile_stats
 
-app = typer.Typer(name="gitpulse", help="Terminal dashboard for GitHub profile stats.")
+app = typer.Typer(name="gitpulse", help="Beautiful terminal dashboard for any GitHub user's profile stats.")
 console = Console()
 err_console = Console(stderr=True)
 
