@@ -24,3 +24,13 @@ gitpulse torvalds --json
 - [Rich](https://rich.readthedocs.io/) â€” terminal formatting
 - [httpx](https://www.python-httpx.org/) â€” async HTTP client
 
+
+## What You Get
+
+| Feature | Description |
+|---------|-------------|
+| Profile | Name, bio, followers |
+| Languages | Top languages with bars |
+| Repos | Stars, forks, top repos |
+| Streak | Current and longest streaks |
+| Commits | Recent commit messages |
