@@ -34,3 +34,12 @@ gitpulse torvalds --json
 | Repos | Stars, forks, top repos |
 | Streak | Current and longest streaks |
 | Commits | Recent commit messages |
+
+## Development
+
+```bash
+git clone https://github.com/Marian003/gitpulse
+cd gitpulse
+pip install -e ".[dev]"
+pytest
+```
