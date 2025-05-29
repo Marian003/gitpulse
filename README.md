@@ -43,3 +43,11 @@ cd gitpulse
 pip install -e ".[dev]"
 pytest
 ```
+
+## Configuration
+
+Set `GITHUB_TOKEN` to authenticate and get higher rate limits:
+
+```bash
+export GITHUB_TOKEN=ghp_your_token_here
+```
