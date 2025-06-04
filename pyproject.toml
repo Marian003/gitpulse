@@ -20,6 +20,7 @@ gitpulse = "gitpulse.cli:app"
 dev = [
     "pytest",
     "pytest-asyncio",
+    "respx",
 ]
 
 [tool.hatch.build.targets.wheel]
