@@ -21,6 +21,7 @@ dev = [
     "pytest",
     "pytest-asyncio",
     "respx",
+    "ruff",
 ]
 
 [tool.hatch.build.targets.wheel]
