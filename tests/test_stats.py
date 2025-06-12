@@ -26,3 +26,14 @@ class TestComputeLanguages:
         result = compute_languages(repos)
         assert result[0].name == "Python"
         assert result[0].count == 2
+
+    def test_empty_repos(self):
+        from gitpulse.stats import compute_languages
+        assert compute_languages([]) == []
+
+    def test_none_language_skipped(self):
+        from gitpulse.stats import compute_languages
+        repos = [_make_repo(None), _make_repo("Python")]
+        result = compute_languages(repos)
+        assert len(result) == 1
+        assert result[0].name == "Python"
