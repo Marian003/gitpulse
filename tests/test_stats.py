@@ -37,3 +37,9 @@ class TestComputeLanguages:
         result = compute_languages(repos)
         assert len(result) == 1
         assert result[0].name == "Python"
+
+    def test_top_n_limit(self):
+        from gitpulse.stats import compute_languages
+        repos = [_make_repo(str(i)) for i in range(10)]
+        result = compute_languages(repos, top_n=3)
+        assert len(result) == 3
