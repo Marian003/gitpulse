@@ -43,3 +43,10 @@ class TestComputeLanguages:
         repos = [_make_repo(str(i)) for i in range(10)]
         result = compute_languages(repos, top_n=3)
         assert len(result) == 3
+
+    def test_percentage_sums_to_100(self):
+        from gitpulse.stats import compute_languages
+        repos = [_make_repo("Python"), _make_repo("Go"), _make_repo("Rust")]
+        result = compute_languages(repos, top_n=3)
+        total = sum(r.percentage for r in result)
+        assert abs(total - 100.0) < 0.5
