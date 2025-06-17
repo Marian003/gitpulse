@@ -50,3 +50,13 @@ class TestComputeLanguages:
         result = compute_languages(repos, top_n=3)
         total = sum(r.percentage for r in result)
         assert abs(total - 100.0) < 0.5
+
+
+class TestComputeRepoStats:
+    def test_aggregation(self):
+        from gitpulse.stats import compute_repo_stats
+        repos = [_make_repo(stars=5, forks=2), _make_repo(stars=3, forks=1)]
+        result = compute_repo_stats(repos)
+        assert result.total_stars == 8
+        assert result.total_forks == 3
+        assert result.total_repos == 2
