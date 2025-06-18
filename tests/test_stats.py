@@ -60,3 +60,9 @@ class TestComputeRepoStats:
         assert result.total_stars == 8
         assert result.total_forks == 3
         assert result.total_repos == 2
+
+    def test_empty_repos(self):
+        from gitpulse.stats import compute_repo_stats
+        result = compute_repo_stats([])
+        assert result.total_stars == 0
+        assert result.total_repos == 0
