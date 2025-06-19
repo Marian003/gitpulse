@@ -66,3 +66,15 @@ class TestComputeRepoStats:
         result = compute_repo_stats([])
         assert result.total_stars == 0
         assert result.total_repos == 0
+
+
+class TestComputeStreak:
+    def test_consecutive_days(self):
+        from gitpulse.stats import compute_streak
+        events = [
+            _make_push_event("2025-06-01T10:00:00Z"),
+            _make_push_event("2025-06-02T10:00:00Z"),
+            _make_push_event("2025-06-03T10:00:00Z"),
+        ]
+        result = compute_streak(events)
+        assert result.longest_streak == 3
