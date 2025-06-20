@@ -78,3 +78,12 @@ class TestComputeStreak:
         ]
         result = compute_streak(events)
         assert result.longest_streak == 3
+
+    def test_streak_broken_by_gap(self):
+        from gitpulse.stats import compute_streak
+        events = [
+            _make_push_event("2025-06-01T10:00:00Z"),
+            _make_push_event("2025-06-03T10:00:00Z"),  # gap on Jun 2
+        ]
+        result = compute_streak(events)
+        assert result.longest_streak == 1
