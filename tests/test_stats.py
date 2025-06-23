@@ -87,3 +87,9 @@ class TestComputeStreak:
         ]
         result = compute_streak(events)
         assert result.longest_streak == 1
+
+    def test_empty_events(self):
+        from gitpulse.stats import compute_streak
+        result = compute_streak([])
+        assert result.current_streak == 0
+        assert result.longest_streak == 0
