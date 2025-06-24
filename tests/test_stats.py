@@ -93,3 +93,9 @@ class TestComputeStreak:
         result = compute_streak([])
         assert result.current_streak == 0
         assert result.longest_streak == 0
+
+    def test_non_push_events_ignored(self):
+        from gitpulse.stats import compute_streak
+        events = [{"type": "WatchEvent", "created_at": "2025-06-01T10:00:00Z"}]
+        result = compute_streak(events)
+        assert result.current_streak == 0
