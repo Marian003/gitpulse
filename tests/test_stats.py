@@ -99,3 +99,13 @@ class TestComputeStreak:
         events = [{"type": "WatchEvent", "created_at": "2025-06-01T10:00:00Z"}]
         result = compute_streak(events)
         assert result.current_streak == 0
+
+
+class TestExtractRecentCommits:
+    def test_basic_extraction(self):
+        from gitpulse.stats import extract_recent_commits
+        events = [_make_push_event()]
+        result = extract_recent_commits(events)
+        assert len(result) == 1
+        assert result[0].sha == "abc1234"
+        assert result[0].message == "test commit"
