@@ -109,3 +109,9 @@ class TestExtractRecentCommits:
         assert len(result) == 1
         assert result[0].sha == "abc1234"
         assert result[0].message == "test commit"
+
+    def test_limit_respected(self):
+        from gitpulse.stats import extract_recent_commits
+        events = [_make_push_event() for _ in range(20)]
+        result = extract_recent_commits(events, limit=5)
+        assert len(result) == 5
