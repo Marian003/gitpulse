@@ -115,3 +115,10 @@ class TestExtractRecentCommits:
         events = [_make_push_event() for _ in range(20)]
         result = extract_recent_commits(events, limit=5)
         assert len(result) == 5
+
+    def test_long_message_truncated(self):
+        from gitpulse.stats import extract_recent_commits
+        long_msg = "x" * 100
+        events = [_make_push_event(commits=[{"sha": "abc1234", "message": long_msg}])]
+        result = extract_recent_commits(events)
+        assert len(result[0].message) <= 72
