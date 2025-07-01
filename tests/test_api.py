@@ -8,3 +8,15 @@ from gitpulse.config import Config
 @pytest.fixture
 def config():
     return Config(token="test-token", api_base="https://api.github.com")
+
+
+@respx.mock
+@pytest.mark.asyncio
+async def test_fetch_user_success(config):
+    from gitpulse.api import GitHubClient
+    respx.get("https://api.github.com/users/torvalds").mock(
+        return_value=httpx.Response(200, json={"login": "torvalds", "name": "Linus"})
+    )
+    async with GitHubClient(config) as client:
+        user = await client.fetch_user("torvalds")
+    assert user["login"] == "torvalds"
