@@ -20,3 +20,15 @@ async def test_fetch_user_success(config):
     async with GitHubClient(config) as client:
         user = await client.fetch_user("torvalds")
     assert user["login"] == "torvalds"
+
+
+@respx.mock
+@pytest.mark.asyncio
+async def test_fetch_user_not_found(config):
+    from gitpulse.api import GitHubClient, UserNotFoundError
+    respx.get("https://api.github.com/users/nobody").mock(
+        return_value=httpx.Response(404, json={"message": "Not Found"})
+    )
+    async with GitHubClient(config) as client:
+        with pytest.raises(UserNotFoundError):
+            await client.fetch_user("nobody")
