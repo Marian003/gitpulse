@@ -32,3 +32,15 @@ async def test_fetch_user_not_found(config):
     async with GitHubClient(config) as client:
         with pytest.raises(UserNotFoundError):
             await client.fetch_user("nobody")
+
+
+@respx.mock
+@pytest.mark.asyncio
+async def test_rate_limit_error(config):
+    from gitpulse.api import GitHubClient, RateLimitError
+    respx.get("https://api.github.com/users/user").mock(
+        return_value=httpx.Response(403, headers={"x-ratelimit-remaining": "0"}, json={})
+    )
+    async with GitHubClient(config) as client:
+        with pytest.raises(RateLimitError):
+            await client.fetch_user("user")
