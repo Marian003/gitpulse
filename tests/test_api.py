@@ -44,3 +44,15 @@ async def test_rate_limit_error(config):
     async with GitHubClient(config) as client:
         with pytest.raises(RateLimitError):
             await client.fetch_user("user")
+
+
+@respx.mock
+@pytest.mark.asyncio
+async def test_fetch_repos(config):
+    from gitpulse.api import GitHubClient
+    respx.get("https://api.github.com/users/user/repos").mock(
+        return_value=httpx.Response(200, json=[{"name": "repo1"}, {"name": "repo2"}])
+    )
+    async with GitHubClient(config) as client:
+        repos = await client.fetch_repos("user")
+    assert len(repos) == 2
