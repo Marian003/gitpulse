@@ -56,3 +56,15 @@ async def test_fetch_repos(config):
     async with GitHubClient(config) as client:
         repos = await client.fetch_repos("user")
     assert len(repos) == 2
+
+
+@respx.mock
+@pytest.mark.asyncio
+async def test_fetch_events(config):
+    from gitpulse.api import GitHubClient
+    respx.get("https://api.github.com/users/user/events/public").mock(
+        return_value=httpx.Response(200, json=[{"type": "PushEvent"}])
+    )
+    async with GitHubClient(config) as client:
+        events = await client.fetch_events("user")
+    assert events[0]["type"] == "PushEvent"
