@@ -88,3 +88,13 @@ async def test_fetch_all_concurrent(config):
     assert user["login"] == "user"
     assert repos == []
     assert events == []
+
+
+def test_auth_header_with_token():
+    config = Config(token="my-token")
+    assert config.headers.get("Authorization") == "Bearer my-token"
+
+
+def test_no_auth_header_without_token():
+    config = Config()
+    assert "Authorization" not in config.headers
