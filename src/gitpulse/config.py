@@ -4,23 +4,29 @@ import os
 from dataclasses import dataclass
 from typing import Optional
 
-ENV_TOKEN_KEY = "GITHUB_TOKEN"
 
-@dataclass
+@dataclass(frozen=True)
 class Config:
     """Configuration for the GitPulse API client."""
+
     token: Optional[str] = None
+    api_base: str = "https://api.github.com"
     timeout: float = 15.0
     max_retries: int = 2
 
     @property
     def headers(self) -> dict[str, str]:
-        h = {"Accept": "application/vnd.github+json"}
+        h = {
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+        }
         if self.token:
             h["Authorization"] = f"Bearer {self.token}"
         return h
 
+
 def resolve_token(token_flag: Optional[str] = None) -> Optional[str]:
+    """Return token: flag takes priority, then GITHUB_TOKEN env var."""
     if token_flag:
         return token_flag
-    return os.environ.get(ENV_TOKEN_KEY) or None
+    return os.environ.get("GITHUB_TOKEN") or None
