@@ -26,3 +26,6 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/gitpulse"]
+
+[tool.ruff]
+line-length = 100
