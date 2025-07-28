@@ -122,3 +122,10 @@ class TestExtractRecentCommits:
         events = [_make_push_event(commits=[{"sha": "abc1234", "message": long_msg}])]
         result = extract_recent_commits(events)
         assert len(result[0].message) <= 72
+
+    def test_single_day_streak(self):
+        from gitpulse.stats import compute_streak
+        events = [_make_push_event("2025-06-01T10:00:00Z")]
+        result = compute_streak(events)
+        assert result.longest_streak == 1
+        assert result.active_days == 1
