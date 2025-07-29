@@ -129,3 +129,12 @@ class TestExtractRecentCommits:
         result = compute_streak(events)
         assert result.longest_streak == 1
         assert result.active_days == 1
+
+
+class TestEdgeCases:
+    def test_single_repo(self):
+        from gitpulse.stats import compute_repo_stats
+        repos = [_make_repo("Python", stars=10, forks=2)]
+        result = compute_repo_stats(repos)
+        assert result.total_repos == 1
+        assert result.most_starred_name == "test-repo"
