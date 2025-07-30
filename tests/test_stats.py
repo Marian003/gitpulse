@@ -138,3 +138,10 @@ class TestEdgeCases:
         result = compute_repo_stats(repos)
         assert result.total_repos == 1
         assert result.most_starred_name == "test-repo"
+
+    def test_user_with_no_bio(self):
+        from gitpulse.stats import build_profile_stats
+        user = {"login": "user", "name": "Test", "bio": None, "followers": 0,
+                "following": 0, "public_repos": 0, "avatar_url": "", "html_url": ""}
+        result = build_profile_stats((user, [], []))
+        assert result.bio is None
