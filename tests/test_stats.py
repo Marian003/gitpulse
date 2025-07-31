@@ -145,3 +145,9 @@ class TestEdgeCases:
                 "following": 0, "public_repos": 0, "avatar_url": "", "html_url": ""}
         result = build_profile_stats((user, [], []))
         assert result.bio is None
+
+    def test_zero_star_repos(self):
+        from gitpulse.stats import compute_repo_stats
+        repos = [_make_repo(stars=0), _make_repo(stars=0)]
+        result = compute_repo_stats(repos)
+        assert result.total_stars == 0
