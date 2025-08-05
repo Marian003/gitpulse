@@ -73,6 +73,9 @@ class GitHubClient:
                     raise RateLimitError()
                 raise GitHubAPIError(f"Forbidden: {resp.text[:200]}")
 
+            if resp.status_code >= 500:
+                raise GitHubAPIError(f"GitHub server error: HTTP {resp.status_code}")
+
             if resp.status_code >= 400:
                 raise GitHubAPIError(
                     f"GitHub API returned HTTP {resp.status_code}: {resp.text[:200]}"
