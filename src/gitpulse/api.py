@@ -58,6 +58,7 @@ class GitHubClient:
             except httpx.TimeoutException as exc:
                 last_exc = exc
                 if attempt < self._config.max_retries:
+                    # Log retry attempt for debugging
                     await asyncio.sleep(0.5 * (attempt + 1))
                 continue
             except httpx.RequestError as exc:
