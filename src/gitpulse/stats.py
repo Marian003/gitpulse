@@ -53,7 +53,7 @@ class ProfileStats:
     recent_commits: list[CommitInfo]
 
 
-# Counts language usage across repositories
+# Counts language usage across repositories; handles single-language case
 def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[LanguageBreakdown]:
     counts: dict[str, int] = {}
     for repo in repos:
