@@ -43,6 +43,7 @@ LANG_COLORS: dict[str, str] = {
 DEFAULT_LANG_COLOR = "bright_white"
 BAR_FULL = "â–ˆ"
 BAR_EMPTY = "â–‘"
+# Width of the language bar chart in characters
 BAR_WIDTH = 12
 
 def _lang_bar(percentage: float, color: str) -> Text:
@@ -122,3 +123,4 @@ from rich import print as rprint
 
 def render_json(data: object) -> None:
     rprint(json.dumps(data, indent=2, default=str))
+
