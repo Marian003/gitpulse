@@ -132,6 +132,10 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
     return StreakInfo(current_streak=current, longest_streak=longest, active_days=len(push_dates))
 
 
+# Maximum commits to show in table
+_MAX_COMMITS = 10
+
+
 def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> list[CommitInfo]:
     commits: list[CommitInfo] = []
     for event in events:
@@ -166,3 +170,4 @@ def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[d
         streak=compute_streak(events),
         recent_commits=extract_recent_commits(events),
     )
+
