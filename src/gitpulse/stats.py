@@ -107,7 +107,7 @@ def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
         d = _parse_event_date(event)
         if d:
             push_dates.add(d)
-    if not push_dates:  # user has no public push events ??? return zeros
+    if not push_dates:  # user has no public push events -- streak is zero ??? return zeros
         return StreakInfo(current_streak=0, longest_streak=0, active_days=0)
     all_dates = sorted(push_dates)
     longest = 1
