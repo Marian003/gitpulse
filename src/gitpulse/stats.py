@@ -159,7 +159,7 @@ def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[d
     return ProfileStats(
         username=user.get("login", ""),
         name=user.get("name") or user.get("login", ""),
-        bio=user.get("bio"),
+        bio=user.get("bio"),  # may contain non-ASCII characters
         followers=user.get("followers", 0),
         following=user.get("following", 0),
         public_repos=user.get("public_repos", 0),
