@@ -1,9 +1,12 @@
 ﻿<!-- GitPulse -->
 ![Python](https://img.shields.io/badge/python-3.10+-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
+<!-- GitPulse -->
+![Python](https://img.shields.io/badge/python-3.10+-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+
 # GitPulse
 
-Beautiful terminal dashboard for GitHub profile stats.
+Instantly see any GitHub user's profile stats in a beautiful terminal dashboard.
 
 ## Installation
 
@@ -52,3 +55,4 @@ Set `GITHUB_TOKEN` to authenticate and get higher rate limits:
 ```bash
 export GITHUB_TOKEN=ghp_your_token_here
 ```
+
