@@ -56,3 +56,8 @@ Set `GITHUB_TOKEN` to authenticate and get higher rate limits:
 export GITHUB_TOKEN=ghp_your_token_here
 ```
 
+
+
+## Screenshot
+
+> Dashboard renders in your terminal with colors, bars, and tables.
