@@ -13,6 +13,9 @@ Instantly see any GitHub user's profile stats in a beautiful terminal dashboard.
 ```bash
 pip install gitpulse
 
+# Latest from GitHub:
+pip install git+https://github.com/Marian003/gitpulse.git
+
 # Or from source:
 git clone https://github.com/Marian003/gitpulse
 cd gitpulse
