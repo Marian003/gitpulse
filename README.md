@@ -69,3 +69,8 @@ export GITHUB_TOKEN=ghp_your_token_here
 ## Screenshot
 
 > Dashboard renders in your terminal with colors, bars, and tables.
+
+
+## Environment Variables
+
+- GITHUB_TOKEN - GitHub personal access token for higher rate limits
