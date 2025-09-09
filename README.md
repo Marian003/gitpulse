@@ -74,3 +74,8 @@ export GITHUB_TOKEN=ghp_your_token_here
 ## Environment Variables
 
 - GITHUB_TOKEN - GitHub personal access token for higher rate limits
+
+
+## Rate Limits
+
+Without a token: 60 requests/hour. With token: 5000 requests/hour.
