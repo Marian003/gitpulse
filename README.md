@@ -79,3 +79,8 @@ export GITHUB_TOKEN=ghp_your_token_here
 ## Rate Limits
 
 Without a token: 60 requests/hour. With token: 5000 requests/hour.
+
+
+## Contributing
+
+Pull requests welcome. Please run pytest and uff check src/ before submitting.
