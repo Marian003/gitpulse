@@ -49,7 +49,7 @@ BAR_EMPTY = "\u2591"
 BAR_WIDTH = 12
 
 
-# Private helper -- not part of public API
+# Private helpers -- these are internal rendering utilities
 def _lang_bar(percentage: float, color: str) -> Text:
     filled = round(percentage / 100 * BAR_WIDTH)
     empty = BAR_WIDTH - filled
