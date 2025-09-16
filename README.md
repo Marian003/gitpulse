@@ -84,3 +84,8 @@ Without a token: 60 requests/hour. With token: 5000 requests/hour.
 ## Contributing
 
 Pull requests welcome. Please run pytest and uff check src/ before submitting.
+
+
+## Error Handling
+
+GitPulse shows clear messages for: user not found, rate limit exceeded, network errors.
