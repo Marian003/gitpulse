@@ -1,8 +1,8 @@
 ﻿<!-- GitPulse -->
-![Python](https://img.shields.io/badge/python-3.10+-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/python-3.10+-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![CI](https://github.com/Marian003/gitpulse/actions/workflows/ci.yml/badge.svg)
 
 <!-- GitPulse -->
-![Python](https://img.shields.io/badge/python-3.10+-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/python-3.10+-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![CI](https://github.com/Marian003/gitpulse/actions/workflows/ci.yml/badge.svg)
 
 # GitPulse
 
@@ -83,7 +83,8 @@ Without a token: 60 requests/hour. With token: 5000 requests/hour.
 
 ## Contributing
 
-Pull requests welcome. Please run pytest and uff check src/ before submitting.
+Pull requests welcome. Please run pytest and 
+uff check src/ before submitting.
 
 
 ## Error Handling
