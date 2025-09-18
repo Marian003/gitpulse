@@ -90,3 +90,8 @@ uff check src/ before submitting.
 ## Error Handling
 
 GitPulse shows clear messages for: user not found, rate limit exceeded, network errors.
+
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
