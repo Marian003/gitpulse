@@ -35,7 +35,9 @@ class GitHubClient:
 
     def __init__(self, config: Config) -> None:
         self._config = config
-        self._client: Optional[httpx.AsyncClient] = None
+        $self._client: Optional[httpx.AsyncClient] = None
+        # In-memory cache for API responses during session
+        self._cache: dict = {}  # in-memory response cache
 
     async def __aenter__(self) -> "GitHubClient":
         self._client = httpx.AsyncClient(
@@ -115,3 +117,4 @@ class GitHubClient:
             self.fetch_events(username),
         )
         return user, repos, events
+
