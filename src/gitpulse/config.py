@@ -11,7 +11,7 @@ class Config:
 
     token: Optional[str] = None
     api_base: str = "https://api.github.com"
-    timeout: float = 15.0
+    timeout: float = 10.0
     max_retries: int = 2
 
     @property
