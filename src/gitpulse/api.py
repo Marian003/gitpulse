@@ -51,7 +51,7 @@ class GitHubClient:
         if self._client:
             await self._client.aclose()
 
-    # Main HTTP request handler with retry logic
+    # Main HTTP request handler with retry logic and pagination support
     async def _get(self, path: str, params: Optional[dict[str, Any]] = None) -> Any:
         assert self._client is not None, "Client not initialised ??? use async context manager"
         last_exc: Exception = RuntimeError("No attempts made")
