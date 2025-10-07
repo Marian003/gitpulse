@@ -57,6 +57,8 @@ class ProfileStats:
 def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[LanguageBreakdown]:
     counts: dict[str, int] = {}
     for repo in repos:
+        if repo.get("fork"):  # skip forked repos for language stats
+            continue
         lang = repo.get("language")
         if lang:  # skip repos with no language set
             counts[lang] = counts.get(lang, 0) + 1
@@ -170,4 +172,5 @@ def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[d
         streak=compute_streak(events),
         recent_commits=extract_recent_commits(events),
     )
+
 
