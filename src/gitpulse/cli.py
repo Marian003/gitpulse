@@ -26,6 +26,7 @@ def main(
     username: str = typer.Argument(..., help="GitHub username to look up"),
     token: Optional[str] = typer.Option(None, "--token", "-t", help="GitHub personal access token (or set GITHUB_TOKEN env var)"),
     json_output: bool = typer.Option(False, "--json", "-j", help="Output raw JSON instead of the dashboard"),
+    no_forks: bool = typer.Option(False, "--no-forks", help="Exclude forked repos from stats"),
     version: Optional[bool] = typer.Option(None, "--version", "-v", callback=_version_callback, is_eager=True),
 ) -> None:
     resolved_token = resolve_token(token)
@@ -52,3 +53,4 @@ def main(
     except GitHubAPIError as exc:
         err_console.print(f"[bold red]API error:[/bold red] {exc}")
         raise typer.Exit(1)
+
