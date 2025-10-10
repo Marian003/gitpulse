@@ -21,6 +21,7 @@ class RepoStats:
     most_forked_name: str
     most_forked_forks: int
     total_repos: int
+    total_size_kb: int = 0
 
 
 @dataclass
