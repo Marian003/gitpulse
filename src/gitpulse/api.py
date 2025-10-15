@@ -65,7 +65,8 @@ class GitHubClient:
                     await asyncio.sleep(0.5 * (attempt + 1))
                 continue
             except httpx.RequestError as exc:
-                raise GitHubAPIError(f"Network error: {exc}") from exc
+                # Raise appropriate error for client-side issues
+        raise GitHubAPIError(f"Network error: {exc}") from exc
 
             if resp.status_code == 404:
                 username = path.strip("/").split("/")[-1]
@@ -75,18 +76,22 @@ class GitHubClient:
                 remaining = resp.headers.get("x-ratelimit-remaining", "1")
                 if remaining == "0":
                     raise RateLimitError()
-                raise GitHubAPIError(f"Forbidden: {resp.text[:200]}")
+                # Raise appropriate error for client-side issues
+        raise GitHubAPIError(f"Forbidden: {resp.text[:200]}")
 
             if resp.status_code >= 500:
-                raise GitHubAPIError(f"GitHub server error: HTTP {resp.status_code}")
+                # Raise appropriate error for client-side issues
+        raise GitHubAPIError(f"GitHub server error: HTTP {resp.status_code}")
 
             if resp.status_code >= 400:
-                raise GitHubAPIError(
+                # Raise appropriate error for client-side issues
+        raise GitHubAPIError(
                     f"GitHub API returned HTTP {resp.status_code}: {resp.text[:200]}"
                 )
 
             return resp.json()
 
+        # Raise appropriate error for client-side issues
         raise GitHubAPIError(
             f"Request timed out after {self._config.max_retries + 1} attempts"
         ) from last_exc
