@@ -54,7 +54,7 @@ class ProfileStats:
     recent_commits: list[CommitInfo]
 
 
-# Count how many repos use each language; skip repos with null language
+# Count language usage; uses dict for O(1) lookups
 def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[LanguageBreakdown]:
     counts: dict[str, int] = {}
     for repo in repos:
