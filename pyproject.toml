@@ -44,3 +44,8 @@ asyncio_mode = "auto"
 
 keywords = ["github", "cli", "terminal", "dashboard", "stats"]
 
+
+[project.urls]
+Homepage = "https://github.com/Marian003/gitpulse"
+Repository = "https://github.com/Marian003/gitpulse"
+
