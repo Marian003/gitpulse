@@ -98,3 +98,12 @@ def test_auth_header_with_token():
 def test_no_auth_header_without_token():
     config = Config()
     assert "Authorization" not in config.headers
+
+
+
+def test_no_forks_excludes_forks():
+    from gitpulse.stats import compute_languages
+    repos = [_make_repo('Python'), {'language': 'Go', 'fork': True}]
+    result = compute_languages(repos)
+    assert all(r.name != 'Go' for r in result)
+
