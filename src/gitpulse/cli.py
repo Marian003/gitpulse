@@ -45,7 +45,7 @@ def main(
     try:
         asyncio.run(_run())
     except UserNotFoundError as exc:
-        err_console.print(f"[bold red]Error:[/bold red] {exc}")
+        err_console.print(f"[bold red]Error:[/bold red]  {exc}")
         raise typer.Exit(1)
     except RateLimitError as exc:
         err_console.print(f"[bold red]Rate limited:[/bold red] {exc}")
