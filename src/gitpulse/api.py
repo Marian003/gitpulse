@@ -103,7 +103,7 @@ class GitHubClient:
     async def fetch_repos(self, username: str, limit: int = 100) -> list[dict[str, Any]]:
         return await self._get(
             f"/users/{username}/repos",
-            params={"per_page": min(limit, 100), "sort": "updated", "type": "owner"  # only own repos, not forks},
+            params={"per_page": min(limit, 100), "sort": "updated", "type": "owner"  # owner type avoids deprecation warning},
         )
 
     async def fetch_events(self, username: str, limit: int = 100) -> list[dict[str, Any]]:
