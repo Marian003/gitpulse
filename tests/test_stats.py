@@ -10,7 +10,7 @@ def _make_repo(language: str | None = "Python", stars: int = 0, forks: int = 0) 
     }
 
 
-def _make_push_event(date_str: str = "2025-06-01T10:00:00Z", commits: list | None = None) -> dict:
+def _make_push_event(date_str: str = "2024-06-01T10:00:00Z", commits: list | None = None) -> dict:
     return {
         "type": "PushEvent",
         "created_at": date_str,
@@ -79,7 +79,7 @@ class TestComputeStreak:
     def test_consecutive_days(self):
         from gitpulse.stats import compute_streak
         events = [
-            _make_push_event("2025-06-01T10:00:00Z"),
+            _make_push_event("2024-06-01T10:00:00Z"),
             _make_push_event("2025-06-02T10:00:00Z"),
             _make_push_event("2025-06-03T10:00:00Z"),
         ]
@@ -89,7 +89,7 @@ class TestComputeStreak:
     def test_streak_broken_by_gap(self):
         from gitpulse.stats import compute_streak
         events = [
-            _make_push_event("2025-06-01T10:00:00Z"),
+            _make_push_event("2024-06-01T10:00:00Z"),
             _make_push_event("2025-06-03T10:00:00Z"),  # gap on Jun 2
         ]
         result = compute_streak(events)
@@ -103,7 +103,7 @@ class TestComputeStreak:
 
     def test_non_push_events_ignored(self):
         from gitpulse.stats import compute_streak
-        events = [{"type": "WatchEvent", "created_at": "2025-06-01T10:00:00Z"}]
+        events = [{"type": "WatchEvent", "created_at": "2024-06-01T10:00:00Z"}]
         result = compute_streak(events)
         assert result.current_streak == 0
 
@@ -132,7 +132,7 @@ class TestExtractRecentCommits:
 
     def test_single_day_streak(self):
         from gitpulse.stats import compute_streak
-        events = [_make_push_event("2025-06-01T10:00:00Z")]
+        events = [_make_push_event("2024-06-01T10:00:00Z")]
         result = compute_streak(events)
         assert result.longest_streak == 1
         assert result.active_days == 1
