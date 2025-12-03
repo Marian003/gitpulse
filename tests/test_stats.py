@@ -1,4 +1,6 @@
-﻿from typing import Any
+﻿# Helper factories for building test fixtures
+# These avoid repetition across test classes
+from typing import Any
 
 
 def _make_repo(language: str | None = "Python", stars: int = 0, forks: int = 0) -> dict[str, Any]:
@@ -158,3 +160,4 @@ class TestEdgeCases:
         repos = [_make_repo(stars=0), _make_repo(stars=0)]
         result = compute_repo_stats(repos)
         assert result.total_stars == 0
+
