@@ -29,4 +29,6 @@ def resolve_token(token_flag: Optional[str] = None) -> Optional[str]:
     """Return token: flag takes priority, then GITHUB_TOKEN env var."""
     if token_flag:
         return token_flag
-    return os.environ.get("GITHUB_TOKEN") or None
+    env_token = os.environ.get("GITHUB_TOKEN")
+    return env_token if env_token else None
+
