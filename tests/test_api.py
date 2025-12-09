@@ -107,3 +107,10 @@ def test_no_forks_excludes_forks():
     result = compute_languages(repos)
     assert all(r.name != 'Go' for r in result)
 
+
+
+def test_limit_default_is_10():
+    # Verify default limit is sensible
+    from gitpulse.stats import extract_recent_commits
+    assert extract_recent_commits([], limit=10) == []
+
