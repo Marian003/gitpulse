@@ -95,3 +95,14 @@ GitPulse shows clear messages for: user not found, rate limit exceeded, network 
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
+
+
+### Flags
+
+| Flag | Description |
+|------|-------------|
+| --token | GitHub PAT for auth |
+| --json | Raw JSON output |
+| --limit N | Number of commits to show |
+| --no-forks | Exclude forked repos |
+
