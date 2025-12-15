@@ -33,7 +33,7 @@ class TestComputeLanguages:
         from gitpulse.stats import compute_languages
         assert compute_languages([]) == []
 
-    def test_skip_forked_repo(self):
+    def test_skip_fork_in_language_count(self):
         from gitpulse.stats import compute_languages
         repos = [_make_repo("Python"), {"language": "Go", "fork": True}]
         result = compute_languages(repos)
