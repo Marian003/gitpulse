@@ -70,7 +70,7 @@ def _build_profile_panel(stats: ProfileStats) -> Panel:
     t.append(f"\n  \U0001f465 {stats.followers:,} followers  \u00b7  {stats.following:,} following\n")
     t.append(f"  \U0001f4e6 {stats.public_repos} public repos\n")
     t.append(f"\n  \U0001f517 {stats.html_url}\n", style="dim")
-    return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", border_style="cyan", expand=True)
+    return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", border_style="bright_cyan", expand=True)
 
 
 def _build_streak_panel(stats: ProfileStats) -> Panel:
