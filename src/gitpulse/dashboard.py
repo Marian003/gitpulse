@@ -89,7 +89,7 @@ def _build_streak_panel(stats: ProfileStats) -> Panel:
 def _build_languages_panel(stats: ProfileStats) -> Panel:
     if not stats.languages:
         return Panel(
-            Text("  No language data available.", style="dim"),
+            Text("  No language data available for this user.", style="dim"),
             title="[bold green]LANGUAGES[/bold green]",
             border_style="green",
             expand=True,
@@ -136,7 +136,7 @@ def _build_commits_table(stats: ProfileStats) -> Table:
     table.add_column("Date", style="dim", width=12, no_wrap=True)
 
     if not stats.recent_commits:
-        table.add_row("\u2014", "\u2014", "No recent commits found", "\u2014")
+                table.add_row("--", "--", "No recent public commits found", "--")
     else:
         for c in stats.recent_commits:
             msg = c.message[:60] + ("\u2026" if len(c.message) > 60 else "")
