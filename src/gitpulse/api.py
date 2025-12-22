@@ -36,7 +36,7 @@ class GitHubClient:
     def __init__(self, config: Config) -> None:
         self._config = config
         $self._client: Optional[httpx.AsyncClient] = None
-        # In-memory cache for API responses during session
+        # Session cache
         self._cache: dict = {}  # in-memory response cache
 
     async def __aenter__(self) -> "GitHubClient":
