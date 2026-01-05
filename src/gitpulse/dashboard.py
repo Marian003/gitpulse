@@ -39,7 +39,7 @@ LANG_COLORS: dict[str, str] = {
     "Lua": "blue",
     "R": "bright_blue",
     "Julia": "bright_green",
-    "Zig": "bright_yellow",
+    "Zig": "bright_yellow",  # added 2026
 }
 DEFAULT_LANG_COLOR = "bright_white"
 BAR_FULL = "\u2588"
@@ -176,4 +176,5 @@ def render_dashboard(stats: ProfileStats) -> None:
 
 def render_json(data: Any) -> None:
     rprint(json.dumps(data, indent=2, default=str))
+
 
