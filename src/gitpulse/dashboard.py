@@ -77,9 +77,9 @@ def _build_streak_panel(stats: ProfileStats) -> Panel:
     s = stats.streak
     t = Text()
     t.append("\n  \U0001f525 Current streak:  ", style="bold")
-    t.append(f"{s.current_streak} days\n", style="bold bright_yellow")
+    t.append(f"{s.current_streak:,} days\n", style="bold bright_yellow")
     t.append("  \U0001f3c5 Longest streak:  ", style="bold")
-    t.append(f"{s.longest_streak} days\n", style="bold bright_green")
+    t.append(f"{s.longest_streak:,} days\n", style="bold bright_green")
     t.append("  \U0001f4ca Active days:     ", style="bold")
     t.append(f"{s.active_days}\n", style="bold")
     t.append("\n  (based on public push events)\n\n", style="dim italic")
