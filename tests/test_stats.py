@@ -161,3 +161,15 @@ class TestEdgeCases:
         result = compute_repo_stats(repos)
         assert result.total_stars == 0
 
+
+
+
+class TestLanguageColors:
+    def test_zig_has_color(self):
+        from gitpulse.dashboard import LANG_COLORS
+        assert 'Zig' in LANG_COLORS
+
+    def test_elixir_has_color(self):
+        from gitpulse.dashboard import LANG_COLORS
+        assert 'Elixir' in LANG_COLORS
+
