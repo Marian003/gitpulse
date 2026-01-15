@@ -114,3 +114,11 @@ def test_limit_default_is_10():
     from gitpulse.stats import extract_recent_commits
     assert extract_recent_commits([], limit=10) == []
 
+
+
+def test_partial_failure_type():
+    # Verify error types are correct
+    from gitpulse.api import GitHubAPIError, RateLimitError, UserNotFoundError
+    assert issubclass(RateLimitError, GitHubAPIError)
+    assert issubclass(UserNotFoundError, GitHubAPIError)
+
