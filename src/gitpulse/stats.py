@@ -63,7 +63,7 @@ def compute_languages(repos: list[dict[str, Any]], top_n: int = 6) -> list[Langu
         if repo.get("archived"):  # skip archived repos
             continue
         lang = repo.get("language")
-        if lang:  # skip repos with no language set
+        if lang is not None and lang != "":  # skip repos with no language set
             counts[lang] = counts.get(lang, 0) + 1
     if not counts:
         return []
@@ -187,6 +187,7 @@ def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[d
         streak=compute_streak(events),
         recent_commits=extract_recent_commits(events),
     )
+
 
 
 
