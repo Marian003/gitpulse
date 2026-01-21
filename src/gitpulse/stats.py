@@ -163,7 +163,8 @@ def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> lis
         created_at = event.get("created_at", "")
         for commit in (payload.get("commits") or []):
             sha = commit.get("sha", "")[:7]
-            message = commit.get("message", "").split("\n")[0][:72]  # truncate long messages
+            raw_msg = commit.get("message", "") or ""
+            message = raw_msg.split("\n")[0][:72]  # first line only, truncated
             short_repo = repo_name.split("/")[-1] if "/" in repo_name else repo_name
             commits.append(CommitInfo(sha=sha, repo=short_repo, message=message, date=created_at[:10]))
             if len(commits) >= limit:
@@ -187,6 +188,7 @@ def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[d
         streak=compute_streak(events),
         recent_commits=extract_recent_commits(events),
     )
+
 
 
 
