@@ -173,3 +173,15 @@ class TestLanguageColors:
         from gitpulse.dashboard import LANG_COLORS
         assert 'Elixir' in LANG_COLORS
 
+
+
+
+class TestMultilineMessages:
+    def test_multiline_message_first_line_only(self):
+        from gitpulse.stats import extract_recent_commits
+        commits = [{'sha': 'abc1234', 'message': 'first line\nsecond line'}]
+        events = [{'type': 'PushEvent', 'created_at': '2024-01-01T10:00:00Z',
+                   'repo': {'name': 'user/repo'}, 'payload': {'commits': commits}}]
+        result = extract_recent_commits(events)
+        assert '\n' not in result[0].message
+
