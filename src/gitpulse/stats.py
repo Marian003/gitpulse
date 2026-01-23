@@ -117,7 +117,7 @@ def _parse_event_date(event: dict[str, Any]) -> Optional[date]:
 
 
 def compute_streak(events: list[dict[str, Any]]) -> StreakInfo:
-    push_dates: set[date] = set()
+    push_dates: set[date] = set()  # use set for deduplication
     for event in events:
         if event.get("type") != "PushEvent":
             continue
