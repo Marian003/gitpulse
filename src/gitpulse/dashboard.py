@@ -49,7 +49,7 @@ BAR_EMPTY = "\u2591"
 BAR_WIDTH = 12
 
 
-# Private helpers
+# Private panel builder helpers
 def _lang_bar(percentage: float, color: str) -> Text:
     filled = round(percentage / 100 * BAR_WIDTH)
     empty = BAR_WIDTH - filled
@@ -176,5 +176,6 @@ def render_dashboard(stats: ProfileStats) -> None:
 
 def render_json(data: Any) -> None:
     rprint(json.dumps(data, indent=2, default=str))
+
 
 
