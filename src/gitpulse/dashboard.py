@@ -49,7 +49,7 @@ BAR_EMPTY = "\u2591"
 BAR_WIDTH = 12
 
 
-# Private panel builder helpers
+# Private panel builder helpers -- consistent title format
 def _lang_bar(percentage: float, color: str) -> Text:
     filled = round(percentage / 100 * BAR_WIDTH)
     empty = BAR_WIDTH - filled
