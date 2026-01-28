@@ -28,8 +28,8 @@ gitpulse = "gitpulse.cli:app"
 [project.optional-dependencies]
 dev = [
     "pytest",
-    "pytest-asyncio",
-    "respx",
+    "pytest-asyncio>=0.24",
+    "respx>=0.21",
     "ruff",
 ]
 
