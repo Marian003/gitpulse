@@ -161,7 +161,8 @@ def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> lis
         payload = event.get("payload", {})
         repo_name = event.get("repo", {}).get("name", "unknown")
         created_at = event.get("created_at", "")
-        for commit in (payload.get("commits") or []):
+        raw_commits = payload.get("commits") or []
+        for commit in raw_commits:
             sha = commit.get("sha", "")[:7]
             raw_msg = commit.get("message", "") or ""
             message = raw_msg.split("\n")[0][:72]  # first line only, truncated
@@ -188,6 +189,7 @@ def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[d
         streak=compute_streak(events),
         recent_commits=extract_recent_commits(events),
     )
+
 
 
 
