@@ -173,7 +173,7 @@ def extract_recent_commits(events: list[dict[str, Any]], limit: int = 10) -> lis
     return commits
 
 
-def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]) -> ProfileStats:
+def build_profile_stats(  # type: strictdata: tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]) -> ProfileStats:
     user, repos, events = data
     return ProfileStats(
         username=user.get("login", ""),
