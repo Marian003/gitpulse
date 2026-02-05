@@ -145,7 +145,7 @@ class TestEdgeCases:
         from gitpulse.stats import compute_repo_stats
         repos = [_make_repo("Python", stars=10, forks=2)]
         result = compute_repo_stats(repos)
-        assert result.total_repos == 1
+        assert result.total_repos == 1, "Expected exactly one repo"
         assert result.most_starred_name == "test-repo"
 
     def test_user_with_no_bio(self):
