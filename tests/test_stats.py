@@ -185,3 +185,14 @@ class TestMultilineMessages:
         result = extract_recent_commits(events)
         assert '\n' not in result[0].message
 
+
+
+    def test_very_old_account(self):
+        from gitpulse.stats import build_profile_stats
+        user = {'login': 'old', 'name': 'Old User', 'bio': None,
+                'followers': 100, 'following': 50, 'public_repos': 200,
+                'avatar_url': '', 'html_url': 'https://github.com/old',
+                'created_at': '2008-01-01T00:00:00Z'}
+        result = build_profile_stats((user, [], []))
+        assert result.username == 'old'
+
