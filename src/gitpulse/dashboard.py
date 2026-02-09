@@ -70,7 +70,7 @@ def _build_profile_panel(stats: ProfileStats) -> Panel:
     t.append(f"\n  \U0001f465 {stats.followers:,} followers  \u00b7  {stats.following:,} following\n")
     t.append(f"  \U0001f4e6 {stats.public_repos} public repos\n")
     t.append(f"\n  \U0001f517 {stats.html_url}\n", style="dim")
-    return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", border_style="bright_cyan", expand=True)
+    return Panel(t, title="[bold cyan]PROFILE[/bold cyan]", border_style="cyan", expand=True)
 
 
 def _build_streak_panel(stats: ProfileStats) -> Panel:
@@ -117,7 +117,7 @@ def _build_repos_panel(stats: ProfileStats) -> Panel:
     t.append(f"  \u2b50{rs.most_starred_stars:,}\n", style="bright_yellow")
     t.append("  \U0001f500 Most forked:\n", style="bold")
     t.append(f"     {rs.most_forked_name}")
-    t.append(f"  \U0001f374{rs.most_forked_forks:,}\n", style="bright_cyan")
+    t.append(f"  \U0001f374{rs.most_forked_forks:,}\n", style="cyan")
     return Panel(t, title="[bold magenta]REPOSITORIES[/bold magenta]", expand=True)
 
 
@@ -131,7 +131,7 @@ def _build_commits_table(stats: ProfileStats) -> Table:
         title_justify="left",
     )
     table.add_column("SHA", style="dim cyan", width=8, no_wrap=True)
-    table.add_column("Repo", style="bright_cyan", width=20, no_wrap=True)
+    table.add_column("Repo", style="cyan", width=20, no_wrap=True)
     table.add_column("Message", style="white", min_width=30)
     table.add_column("Date", style="dim", width=12, no_wrap=True)
 
