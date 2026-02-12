@@ -93,7 +93,7 @@ def compute_repo_stats(repos: list[dict[str, Any]]) -> RepoStats:
     )
 
 
-def _get_push_dates(events: list) -> set:
+def _collect_push_dates(events: list) -> set:
     """Extract unique dates from PushEvents."""
     dates: set = set()
     for event in events:
@@ -189,6 +189,7 @@ def build_profile_stats(data: tuple[dict[str, Any], list[dict[str, Any]], list[d
         streak=compute_streak(events),
         recent_commits=extract_recent_commits(events),
     )
+
 
 
 
