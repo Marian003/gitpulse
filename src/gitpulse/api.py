@@ -96,7 +96,7 @@ class GitHubClient:
             f"Request timed out after {self._config.max_retries + 1} attempts"
         ) from last_exc
 
-    async def fetch_user(self, username: str) -> dict[str, Any]:  # return type
+    async def fetch_user(self, username: str) -> dict[str, Any]:
         """Fetch the public profile of a GitHub user."""
         return await self._get(f"/users/{username}")
 
@@ -122,4 +122,5 @@ class GitHubClient:
             self.fetch_events(username),
         )
         return user, repos, events
+
 
