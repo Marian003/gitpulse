@@ -17,7 +17,7 @@ classifiers = [
     "Environment :: Console",
 ]
 dependencies = [
-    "typer>=0.13.0",
+    "typer>=0.15.0",
     "rich>=13.9.0",
     "httpx>=0.28.1",
 ]
