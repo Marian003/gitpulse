@@ -196,3 +196,10 @@ class TestMultilineMessages:
         result = build_profile_stats((user, [], []))
         assert result.username == 'old'
 
+
+
+    def test_regression_empty_events(self):
+        from gitpulse.stats import compute_streak
+        result = compute_streak([])
+        assert result.active_days == 0
+
