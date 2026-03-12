@@ -203,3 +203,11 @@ class TestMultilineMessages:
         result = compute_streak([])
         assert result.active_days == 0
 
+
+    def test_large_event_list(self):
+        from gitpulse.stats import extract_recent_commits
+        events = [{'type': 'PushEvent', 'created_at': '2024-01-01T00:00:00Z',
+                   'repo': {'name': 'user/r'}, 'payload': {'commits': [{'sha': 'abc', 'message': 'msg'}]}} for _ in range(100)]
+        result = extract_recent_commits(events, limit=10)
+        assert len(result) == 10
+
