@@ -3,6 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
+# v1.0.0
 name = "gitpulse"
 version = "1.0.0"
 description = "Beautiful terminal dashboard for GitHub profile stats"
@@ -16,6 +17,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Environment :: Console",
 ]
+keywords = ["github", "cli", "terminal", "dashboard", "stats"]
 dependencies = [
     "typer>=0.15.0",
     "rich>=13.9.0",
@@ -33,6 +35,10 @@ dev = [
     "ruff",
 ]
 
+[project.urls]
+Homepage = "https://github.com/Marian003/gitpulse"
+Repository = "https://github.com/Marian003/gitpulse"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/gitpulse"]
 
@@ -41,12 +47,3 @@ line-length = 100
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-
-keywords = ["github", "cli", "terminal", "dashboard", "stats"]
-
-
-[project.urls]
-Homepage = "https://github.com/Marian003/gitpulse"
-Repository = "https://github.com/Marian003/gitpulse"
-
-

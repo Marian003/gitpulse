@@ -31,5 +31,3 @@ def resolve_token(token_flag: Optional[str] = None) -> Optional[str]:
         return token_flag
     env_token = os.environ.get("GITHUB_TOKEN")  # check standard env var
     return env_token if env_token else None
-
-
